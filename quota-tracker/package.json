@@ -1,0 +1,46 @@
+{
+  "name": "quota-tracker",
+  "displayName": "AGY Quota Tracker",
+  "description": "Shows weekly quota usage and refresh timers for Gemini and Claude models in the status bar — auto-fetched from Antigravity",
+  "version": "1.2.0",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "quotaTracker.refresh",
+        "title": "AGY Quota Tracker: Refresh Quota Now"
+      },
+      {
+        "command": "quotaTracker.showDetails",
+        "title": "AGY Quota Tracker: Show Quota Details"
+      }
+    ],
+    "configuration": {
+      "title": "AGY Quota Tracker",
+      "properties": {
+        "quotaTracker.refreshIntervalSeconds": {
+          "type": "number",
+          "default": 30,
+          "description": "How often to automatically fetch fresh quota data from Antigravity (in seconds)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "build": "npm run compile",
+    "vscode:prepublish": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0"
+  }
+}
