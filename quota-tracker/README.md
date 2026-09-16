@@ -1,46 +1,69 @@
 # AGY Quota Tracker
 
-A VS Code / Antigravity IDE extension that shows your **weekly AI model quota** and **time until reset** directly in the status bar.
+**AGY Quota Tracker** is a companion status bar extension designed for **Google Antigravity IDE** (and VS Code with Antigravity running). It automatically connects to your local Antigravity Language Server to display your real-time **Gemini** and **Claude** AI model quotas and reset countdown timers directly in your status bar.
+
+---
 
 ## Features
 
-Three status bar items appear in the bottom-right of your IDE:
+- ⚡ **Automated Local Sync**: Directly communicates with the Antigravity Language Server via local RPC — no manual tracking or API keys required.
+- 📊 **Status Bar Overview**: Shows weekly remaining quota percentage and live reset countdowns:
+  ```text
+  W Gemini: 69% 🕐 3d 8h  |  W Claude: 76% 🕐 5d 10h
+  ```
+- 🔍 **Interactive Details Modal**: Click the status bar item at any time to open a QuickPick breakdown showing both weekly and 5-hour window limits plus a 1-click refresh action.
+- 💡 **Rich Hover Tooltip**: Hover over the status bar item to view formatted markdown details, exact reset dates, and a quick "Refresh Now" action.
+- ⏱️ **Auto-Refresh**: Periodically checks for updated quotas in the background and updates countdown timers dynamically.
 
-| Item | Description |
-|---|---|
-| `🤖 C: ████░ 80%` | Claude weekly quota remaining |
-| `✨ G: ███░░ 60%` | Gemini weekly quota remaining |
-| `🕐 Reset: 2d 6h` | Time until next weekly quota refresh |
+---
 
-- **Color coding**: Green (>50%) → Yellow (>20%) → Red (≤20%)
-- **Progress bar**: 5-block visual fill level
-- **Click to update**: Click the Gemini or Claude bar to manually log your current usage
-- **Click reset timer**: Click the timer to manually reset all counters
+## Requirements
+
+> [!IMPORTANT]
+> This extension is specifically designed for **Google Antigravity IDE** (or VS Code running on a machine where Antigravity IDE / its Language Server is active). If Antigravity is not detected, the status bar will display `$(warning) AGY Quota: Offline`.
+
+Works seamlessly on **Windows**, **macOS**, and **Linux**.
+
+---
 
 ## Configuration
 
-Open **Settings** → search `quotaTracker`:
+You can customize the auto-fetch interval in **Settings** (`Ctrl+,` or `Cmd+,`) by searching for `quotaTracker`:
 
 | Setting | Default | Description |
 |---|---|---|
-| `quotaTracker.weeklyResetDay` | `Monday` | Day of week when quota resets |
-| `quotaTracker.geminiLimit` | `1000` | Weekly Gemini request limit |
-| `quotaTracker.claudeLimit` | `500` | Weekly Claude request limit |
+| `quotaTracker.refreshIntervalSeconds` | `30` | Interval (in seconds) to automatically query the Antigravity Language Server for updated quota data (minimum: 10s). |
+
+---
 
 ## Commands
 
-| Command | Description |
-|---|---|
-| `AGY Quota Tracker: Configure Quota Limits` | Manually enter current usage |
-| `AGY Quota Tracker: Set Weekly Reset Time` | Reset all counters to zero |
+Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) and search for:
+
+| Command | Identifier | Description |
+|---|---|---|
+| **AGY Quota Tracker: Show Quota Details** | `quotaTracker.showDetails` | Displays a popup breakdown of Gemini and Claude limits and reset times. |
+| **AGY Quota Tracker: Refresh Quota Now** | `quotaTracker.refresh` | Forces an immediate refresh from the language server. |
+
+---
 
 ## Installation
 
-### Option A – Install from VSIX
-1. Run `npm install && npm run compile` in this folder
-2. Run `npx vsce package` to build `quota-tracker-1.0.0.vsix`
-3. In VS Code / Antigravity IDE: **Extensions** → **⋯** → **Install from VSIX…**
+### Install from VSIX
+1. Compile the extension and package it:
+   ```bash
+   npm install
+   npm run compile
+   npx @vscode/vsce package
+   ```
+2. In your IDE: Press `Ctrl+Shift+P` → type **Extensions: Install from VSIX...** → select the generated `.vsix` file.
 
-### Option B – Development Mode (instant)
-1. Open this folder in VS Code
-2. Press `F5` to launch Extension Development Host
+### Development Mode
+1. Open the `quota-tracker` folder in Antigravity IDE or VS Code.
+2. Press `F5` to open an Extension Development Host window.
+
+---
+
+## License
+
+[MIT](LICENSE)

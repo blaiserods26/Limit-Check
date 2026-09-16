@@ -10,37 +10,84 @@ const https = require("https");
 // ─── Language Server Discovery ────────────────────────────────────────────────
 let cachedLsInfo = null;
 /**
+ * Resolves potential log directories across Windows, macOS, and Linux
+ */
+function getCandidateLogDirs() {
+    const home = os.homedir();
+    const platform = process.platform;
+    const dirs = [];
+    if (platform === 'win32') {
+        const appData = process.env.APPDATA || path.join(home, 'AppData', 'Roaming');
+        dirs.push(path.join(appData, 'Antigravity IDE', 'logs'));
+        dirs.push(path.join(home, '.gemini', 'antigravity-ide', 'logs'));
+    }
+    else if (platform === 'darwin') {
+        dirs.push(path.join(home, 'Library', 'Application Support', 'Antigravity IDE', 'logs'));
+        dirs.push(path.join(home, '.gemini', 'antigravity-ide', 'logs'));
+    }
+    else {
+        // Linux and other Unix-like systems
+        const configDir = process.env.XDG_CONFIG_HOME || path.join(home, '.config');
+        dirs.push(path.join(configDir, 'Antigravity IDE', 'logs'));
+        dirs.push(path.join(home, '.gemini', 'antigravity-ide', 'logs'));
+    }
+    return dirs.filter(d => fs.existsSync(d));
+}
+/**
+ * Reads up to maxBytes from the beginning of a file to avoid loading huge logs into memory.
+ */
+function readLogHeader(filePath, maxBytes = 64 * 1024) {
+    let fd = null;
+    try {
+        fd = fs.openSync(filePath, 'r');
+        const buffer = Buffer.alloc(maxBytes);
+        const bytesRead = fs.readSync(fd, buffer, 0, maxBytes, 0);
+        return buffer.toString('utf8', 0, bytesRead);
+    }
+    finally {
+        if (fd !== null) {
+            try {
+                fs.closeSync(fd);
+            }
+            catch {
+                // ignore close error
+            }
+        }
+    }
+}
+/**
  * Finds the Antigravity Language Server port and CSRF token from the latest ls-main.log
  */
 function findLanguageServerInfo() {
-    const appData = process.env.APPDATA || path.join(os.homedir(), 'AppData', 'Roaming');
-    const logsDir = path.join(appData, 'Antigravity IDE', 'logs');
-    if (!fs.existsSync(logsDir)) {
+    const candidateDirs = getCandidateLogDirs();
+    if (candidateDirs.length === 0) {
         return null;
     }
     let newestFile = null;
     let newestMtime = 0;
-    try {
-        const dirs = fs.readdirSync(logsDir);
-        for (const d of dirs) {
-            const candidate = path.join(logsDir, d, 'ls-main.log');
-            if (fs.existsSync(candidate)) {
-                const stat = fs.statSync(candidate);
-                if (stat.mtimeMs > newestMtime) {
-                    newestMtime = stat.mtimeMs;
-                    newestFile = candidate;
+    for (const logsDir of candidateDirs) {
+        try {
+            const dirs = fs.readdirSync(logsDir);
+            for (const d of dirs) {
+                const candidate = path.join(logsDir, d, 'ls-main.log');
+                if (fs.existsSync(candidate)) {
+                    const stat = fs.statSync(candidate);
+                    if (stat.mtimeMs > newestMtime) {
+                        newestMtime = stat.mtimeMs;
+                        newestFile = candidate;
+                    }
                 }
             }
         }
-    }
-    catch {
-        return null;
+        catch {
+            continue;
+        }
     }
     if (!newestFile) {
         return null;
     }
     try {
-        const content = fs.readFileSync(newestFile, 'utf8');
+        const content = readLogHeader(newestFile);
         const csrfMatch = content.match(/--csrf_token\s+([a-f0-9-]+)/i);
         const portMatch = content.match(/LS started on port\s+(\d+)/i) ||
             content.match(/listening on random port at\s+(\d+)\s+for HTTPS/i);
@@ -203,7 +250,7 @@ class QuotaTrackerExtension {
         this.uiTickTimer = null;
         this.isFetching = false;
         this.statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
-        this.statusBarItem.command = 'quotaTracker.refresh';
+        this.statusBarItem.command = 'quotaTracker.showDetails';
         context.subscriptions.push(this.statusBarItem);
         // Register commands
         context.subscriptions.push(vscode.commands.registerCommand('quotaTracker.refresh', async () => {
