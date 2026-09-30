@@ -1,38 +1,49 @@
-# AGY Quota Tracker
+# Quoto
 
-**AGY Quota Tracker** is a companion status bar extension designed for **Google Antigravity IDE** (and VS Code with Antigravity running). It automatically connects to your local Antigravity Language Server to display your real-time **Gemini** and **Claude** AI model quotas and reset countdown timers directly in your status bar.
+**Quoto** is a status bar extension that tracks your AI model quotas and reset countdown timers in real time.
+
+Currently built with first-class support for **Google Antigravity IDE**, with support for additional AI coding agents planned on our roadmap.
 
 ---
 
 ## Features
 
-- ⚡ **Automated Local Sync**: Directly communicates with the Antigravity Language Server via local RPC — no manual tracking or API keys required.
-- 📊 **Status Bar Overview**: Shows weekly remaining quota percentage and live reset countdowns:
+- ⚡ **Automated Local Sync**: Directly communicates with the Antigravity Language Server via local RPC — zero manual counting and no external API keys required.
+- 📊 **Status Bar Overview**: Shows remaining quota percentage and live countdowns directly in your status bar:
   ```text
   W Gemini: 69% 🕐 3d 8h  |  W Claude: 76% 🕐 5d 10h
   ```
-- 🔍 **Interactive Details Modal**: Click the status bar item at any time to open a QuickPick breakdown showing both weekly and 5-hour window limits plus a 1-click refresh action.
-- 💡 **Rich Hover Tooltip**: Hover over the status bar item to view formatted markdown details, exact reset dates, and a quick "Refresh Now" action.
-- ⏱️ **Auto-Refresh**: Periodically checks for updated quotas in the background and updates countdown timers dynamically.
+- 🔍 **Interactive Details Modal**: Click the status bar item at any time to open an interactive QuickPick breakdown showing both weekly and 5-hour window limits plus a 1-click refresh action.
+- 💡 **Rich Hover Tooltip**: Hover over the status bar item to view formatted markdown details, exact reset dates, and a quick "Refresh Now" link.
+- ⏱️ **Auto-Refresh**: Automatically checks for quota updates in the background and keeps countdown timers updated dynamically.
 
 ---
 
 ## Requirements
 
-> [!IMPORTANT]
-> This extension is specifically designed for **Google Antigravity IDE** (or VS Code running on a machine where Antigravity IDE / its Language Server is active). If Antigravity is not detected, the status bar will display `$(warning) AGY Quota: Offline`.
+> [!NOTE]
+> Currently, **Quoto** connects to **Google Antigravity IDE** (or VS Code running on a machine where Antigravity IDE / its Language Server is active). If the server is not detected, the status bar displays `$(warning) Quoto: Offline`.
 
-Works seamlessly on **Windows**, **macOS**, and **Linux**.
+Compatible with **Windows**, **macOS**, and **Linux**.
+
+---
+
+## Roadmap
+
+- [x] Antigravity IDE local quota tracking (Gemini & Claude weekly / 5-hour limits)
+- [ ] Customizable warning thresholds (e.g. status bar color change when quota drops below 20%)
+- [ ] Support for additional AI coding agents and CLI assistant quotas
+- [ ] Notification alerts when quotas reset
 
 ---
 
 ## Configuration
 
-You can customize the auto-fetch interval in **Settings** (`Ctrl+,` or `Cmd+,`) by searching for `quotaTracker`:
+Open **Settings** (`Ctrl+,` or `Cmd+,`) and search for `quotaTracker`:
 
 | Setting | Default | Description |
 |---|---|---|
-| `quotaTracker.refreshIntervalSeconds` | `30` | Interval (in seconds) to automatically query the Antigravity Language Server for updated quota data (minimum: 10s). |
+| `quotaTracker.refreshIntervalSeconds` | `30` | Interval (in seconds) to automatically query the language server for updated quota data (minimum: 10s). |
 
 ---
 
@@ -42,8 +53,8 @@ Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) and search for:
 
 | Command | Identifier | Description |
 |---|---|---|
-| **AGY Quota Tracker: Show Quota Details** | `quotaTracker.showDetails` | Displays a popup breakdown of Gemini and Claude limits and reset times. |
-| **AGY Quota Tracker: Refresh Quota Now** | `quotaTracker.refresh` | Forces an immediate refresh from the language server. |
+| **Quoto: Show Quota Details** | `quotaTracker.showDetails` | Displays a popup breakdown of Gemini and Claude limits and reset times. |
+| **Quoto: Refresh Quota Now** | `quotaTracker.refresh` | Forces an immediate refresh from the language server. |
 
 ---
 
@@ -60,7 +71,7 @@ Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) and search for:
 
 ### Development Mode
 1. Open the `quota-tracker` folder in Antigravity IDE or VS Code.
-2. Press `F5` to open an Extension Development Host window.
+2. Press `F5` to launch an Extension Development Host window.
 
 ---
 

@@ -273,7 +273,7 @@ class QuotaTrackerExtension {
         this.startUiTickTimer();
     }
     updateStatusConnecting() {
-        this.statusBarItem.text = '$(sync~spin) AGY Quota: Connecting...';
+        this.statusBarItem.text = '$(sync~spin) Quoto: Connecting...';
         this.statusBarItem.tooltip = 'Connecting to Antigravity Language Server to fetch quota...';
     }
     async refresh(forceServerRefresh = false, userInitiated = false) {
@@ -294,12 +294,12 @@ class QuotaTrackerExtension {
             };
             this.render();
             if (userInitiated) {
-                vscode.window.showInformationMessage('AGY Quota successfully refreshed!');
+                vscode.window.showInformationMessage('Quoto: Quota successfully refreshed!');
             }
         }
         catch (err) {
             if (!this.state) {
-                this.statusBarItem.text = '$(warning) AGY Quota: Offline';
+                this.statusBarItem.text = '$(warning) Quoto: Offline';
                 this.statusBarItem.tooltip = `Could not fetch quota: ${err.message}\nClick to retry.`;
             }
             if (userInitiated) {
@@ -328,7 +328,7 @@ class QuotaTrackerExtension {
         const md = new vscode.MarkdownString();
         md.isTrusted = true;
         md.supportThemeIcons = true;
-        md.appendMarkdown('### **Antigravity Model Quotas**\n\n');
+        md.appendMarkdown('### **Quoto — AI Model Quotas**\n\n');
         if (gemini) {
             md.appendMarkdown('#### **Gemini Models**\n');
             md.appendMarkdown(`- **Weekly Limit Remaining:** **${gemini.weeklyPercent}%**\n`);
@@ -384,7 +384,7 @@ class QuotaTrackerExtension {
             description: 'Fetch the latest limits from Antigravity'
         });
         vscode.window.showQuickPick(items, {
-            title: 'Antigravity Quota Tracker Details',
+            title: 'Quoto — Model Quota Details',
             placeHolder: 'Select an action or view quota details'
         }).then(selected => {
             if (selected && selected.label.includes('Refresh')) {

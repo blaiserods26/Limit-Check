@@ -1,9 +1,9 @@
 {
-  "name": "quota-tracker",
-  "displayName": "AGY Quota Tracker",
-  "description": "Shows weekly quota usage and refresh timers for Gemini and Claude models in the status bar — auto-fetched from Antigravity",
+  "name": "quoto",
+  "displayName": "Quoto",
+  "description": "Track AI model quotas and reset countdowns in your status bar (supporting Antigravity IDE, with more coding agents planned)",
   "version": "1.2.0",
-  "publisher": "local",
+  "publisher": "BlaiseRodrigues",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
     "Other"
   ],
   "keywords": [
+    "quoto",
     "antigravity",
     "quota",
     "gemini",
@@ -33,15 +34,15 @@
     "commands": [
       {
         "command": "quotaTracker.refresh",
-        "title": "AGY Quota Tracker: Refresh Quota Now"
+        "title": "Quoto: Refresh Quota Now"
       },
       {
         "command": "quotaTracker.showDetails",
-        "title": "AGY Quota Tracker: Show Quota Details"
+        "title": "Quoto: Show Quota Details"
       }
     ],
     "configuration": {
-      "title": "AGY Quota Tracker",
+      "title": "Quoto",
       "properties": {
         "quotaTracker.refreshIntervalSeconds": {
           "type": "number",
