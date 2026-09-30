@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="images/icon.png" alt="Quoto Logo" width="160" />
+</p>
+
 # Quoto
 
 **Quoto** is a status bar extension that tracks your AI model quotas and reset countdown timers in real time.
@@ -39,11 +43,11 @@ Compatible with **Windows**, **macOS**, and **Linux**.
 
 ## Configuration
 
-Open **Settings** (`Ctrl+,` or `Cmd+,`) and search for `quotaTracker`:
+Open **Settings** (`Ctrl+,` or `Cmd+,`) and search for `quoto`:
 
 | Setting | Default | Description |
 |---|---|---|
-| `quotaTracker.refreshIntervalSeconds` | `30` | Interval (in seconds) to automatically query the language server for updated quota data (minimum: 10s). |
+| `quoto.refreshIntervalSeconds` | `30` | Interval (in seconds) to automatically query the language server for updated quota data (minimum: 10s). |
 
 ---
 
@@ -53,8 +57,8 @@ Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) and search for:
 
 | Command | Identifier | Description |
 |---|---|---|
-| **Quoto: Show Quota Details** | `quotaTracker.showDetails` | Displays a popup breakdown of Gemini and Claude limits and reset times. |
-| **Quoto: Refresh Quota Now** | `quotaTracker.refresh` | Forces an immediate refresh from the language server. |
+| **Quoto: Show Quota Details** | `quoto.showDetails` | Displays a popup breakdown of Gemini and Claude limits and reset times. |
+| **Quoto: Refresh Quota Now** | `quoto.refresh` | Forces an immediate refresh from the language server. |
 
 ---
 

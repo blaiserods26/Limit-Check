@@ -243,24 +243,24 @@ function formatLocalResetDate(isoDateStr) {
     }
 }
 // ─── Extension Controller ─────────────────────────────────────────────────────
-class QuotaTrackerExtension {
+class QuotoExtension {
     constructor(context) {
         this.state = null;
         this.fetchIntervalTimer = null;
         this.uiTickTimer = null;
         this.isFetching = false;
         this.statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
-        this.statusBarItem.command = 'quotaTracker.showDetails';
+        this.statusBarItem.command = 'quoto.showDetails';
         context.subscriptions.push(this.statusBarItem);
         // Register commands
-        context.subscriptions.push(vscode.commands.registerCommand('quotaTracker.refresh', async () => {
+        context.subscriptions.push(vscode.commands.registerCommand('quoto.refresh', async () => {
             await this.refresh(true, true);
-        }), vscode.commands.registerCommand('quotaTracker.showDetails', () => {
+        }), vscode.commands.registerCommand('quoto.showDetails', () => {
             this.showDetailsModal();
         }));
         // Listen for config changes
         context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(e => {
-            if (e.affectsConfiguration('quotaTracker.refreshIntervalSeconds')) {
+            if (e.affectsConfiguration('quoto.refreshIntervalSeconds')) {
                 this.restartFetchTimer();
             }
         }));
@@ -351,7 +351,7 @@ class QuotaTrackerExtension {
         }
         md.appendMarkdown('---\n');
         const timeStr = this.state.lastUpdated.toLocaleTimeString();
-        md.appendMarkdown(`*Updated at ${timeStr} • [Refresh Now](command:quotaTracker.refresh)*\n`);
+        md.appendMarkdown(`*Updated at ${timeStr} • [Refresh Now](command:quoto.refresh)*\n`);
         this.statusBarItem.tooltip = md;
     }
     showDetailsModal() {
@@ -397,7 +397,7 @@ class QuotaTrackerExtension {
             clearInterval(this.fetchIntervalTimer);
             this.fetchIntervalTimer = null;
         }
-        const config = vscode.workspace.getConfiguration('quotaTracker');
+        const config = vscode.workspace.getConfiguration('quoto');
         const intervalSec = Math.max(10, config.get('refreshIntervalSeconds', 30));
         this.fetchIntervalTimer = setInterval(() => {
             this.refresh(false, false);
@@ -425,7 +425,7 @@ class QuotaTrackerExtension {
 // ─── Extension Entry Points ───────────────────────────────────────────────────
 let tracker = null;
 function activate(context) {
-    tracker = new QuotaTrackerExtension(context);
+    tracker = new QuotoExtension(context);
 }
 function deactivate() {
     if (tracker) {

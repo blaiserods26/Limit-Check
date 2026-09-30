@@ -1,9 +1,10 @@
 {
-  "name": "quoto",
-  "displayName": "Quoto",
+  "name": "Quotoo",
+  "displayName": "Quotoo",
   "description": "Track AI model quotas and reset countdowns in your status bar (supporting Antigravity IDE, with more coding agents planned)",
-  "version": "1.2.0",
+  "version": "1.0.0",
   "publisher": "BlaiseRodrigues",
+  "icon": "images/icon.png",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -33,18 +34,18 @@
   "contributes": {
     "commands": [
       {
-        "command": "quotaTracker.refresh",
+        "command": "quoto.refresh",
         "title": "Quoto: Refresh Quota Now"
       },
       {
-        "command": "quotaTracker.showDetails",
+        "command": "quoto.showDetails",
         "title": "Quoto: Show Quota Details"
       }
     ],
     "configuration": {
       "title": "Quoto",
       "properties": {
-        "quotaTracker.refreshIntervalSeconds": {
+        "quoto.refreshIntervalSeconds": {
           "type": "number",
           "default": 30,
           "description": "How often to automatically fetch fresh quota data from Antigravity (in seconds)"
@@ -57,7 +58,7 @@
     "watch": "tsc -watch -p ./",
     "build": "npm run compile",
     "vscode:prepublish": "npm run compile",
-    "package": "vsce package"
+    "package": "npx --yes @vscode/vsce@2.32.0 package"
   },
   "devDependencies": {
     "@types/vscode": "^1.85.0",
