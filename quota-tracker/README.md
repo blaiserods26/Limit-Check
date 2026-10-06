@@ -1,10 +1,6 @@
-<p align="center">
-  <img src="images/icon.png" alt="Quoto Logo" width="160" />
-</p>
+# quotooo
 
-# Quoto
-
-**Quoto** is a status bar extension that tracks your AI model quotas and reset countdown timers in real time.
+**quotooo** is a status bar extension that tracks your AI model quotas and reset countdown timers in real time.
 
 Currently built with first-class support for **Google Antigravity IDE**, with support for additional AI coding agents planned on our roadmap.
 
@@ -26,7 +22,7 @@ Currently built with first-class support for **Google Antigravity IDE**, with su
 ## Requirements
 
 > [!NOTE]
-> Currently, **Quoto** connects to **Google Antigravity IDE** (or VS Code running on a machine where Antigravity IDE / its Language Server is active). If the server is not detected, the status bar displays `$(warning) Quoto: Offline`.
+> Currently, **quotoooo** connects to **Google Antigravity IDE** (or VS Code running on a machine where Antigravity IDE / its Language Server is active). If the server is not detected, the status bar displays `$(warning) quotooo: Offline`.
 
 Compatible with **Windows**, **macOS**, and **Linux**.
 
@@ -43,11 +39,11 @@ Compatible with **Windows**, **macOS**, and **Linux**.
 
 ## Configuration
 
-Open **Settings** (`Ctrl+,` or `Cmd+,`) and search for `quoto`:
+Open **Settings** (`Ctrl+,` or `Cmd+,`) and search for `quotooo`:
 
 | Setting | Default | Description |
 |---|---|---|
-| `quoto.refreshIntervalSeconds` | `30` | Interval (in seconds) to automatically query the language server for updated quota data (minimum: 10s). |
+| `quotooo.refreshIntervalSeconds` | `30` | Interval (in seconds) to automatically query the language server for updated quota data (minimum: 10s). |
 
 ---
 
@@ -57,8 +53,8 @@ Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) and search for:
 
 | Command | Identifier | Description |
 |---|---|---|
-| **Quoto: Show Quota Details** | `quoto.showDetails` | Displays a popup breakdown of Gemini and Claude limits and reset times. |
-| **Quoto: Refresh Quota Now** | `quoto.refresh` | Forces an immediate refresh from the language server. |
+| **quotooo: Show Quota Details** | `quotooo.showDetails` | Displays a popup breakdown of Gemini and Claude limits and reset times. |
+| **quotooo: Refresh Quota Now** | `quotooo.refresh` | Forces an immediate refresh from the language server. |
 
 ---
 
