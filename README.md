@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="#features"><img src="https://img.shields.io/badge/Antigravity_IDE-Supported-blue?style=flat-square&logo=google" alt="Antigravity IDE" /></a>
-  <a href="#installation"><img src="https://img.shields.io/badge/Version-1.0.1-brightgreen?style=flat-square" alt="Version" /></a>
+  <a href="#installation"><img src="https://img.shields.io/badge/Version-1.0.3-brightgreen?style=flat-square" alt="Version" /></a>
   <a href="quota-tracker/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="License" /></a>
   <img src="https://img.shields.io/badge/Platform-Windows%20|%20macOS%20|%20Linux-lightgrey?style=flat-square" alt="Platform" />
 </p>
@@ -97,7 +97,7 @@ Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) and search for:
    npm run compile
    npm run package
    ```
-2. In Antigravity IDE or VS Code: Press `Ctrl+Shift+P` → type **Extensions: Install from VSIX...** → select `Quotoo-1.0.1.vsix`.
+2. In Antigravity IDE or VS Code: Press `Ctrl+Shift+P` → type **Extensions: Install from VSIX...** → select `Quotoo-1.0.3.vsix`.
 
 ### Development Mode
 1. Open the `quota-tracker` directory in Antigravity IDE or VS Code.

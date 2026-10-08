@@ -1,0 +1,61 @@
+name: Build and Package Quotoo Extension
+
+on:
+  push:
+    branches:
+      - main
+      - extension
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - main
+      - extension
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build & Package VSIX
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: quota-tracker/package-lock.json
+
+      - name: Install dependencies
+        working-directory: quota-tracker
+        run: npm ci
+
+      - name: Compile TypeScript
+        working-directory: quota-tracker
+        run: npm run compile
+
+      - name: Package VSIX
+        working-directory: quota-tracker
+        run: npm run package
+
+      - name: Upload VSIX Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: quotoo-vsix
+          path: quota-tracker/*.vsix
+          retention-days: 14
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: quota-tracker/*.vsix
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

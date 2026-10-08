@@ -2,7 +2,7 @@
   "name": "Quotoo",
   "displayName": "Quotoo",
   "description": "Track AI model quotas and reset countdowns in your status bar (supporting Antigravity IDE, with more coding agents planned)",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "publisher": "BlaiseRodrigues",
   "icon": "images/icon.png",
   "license": "MIT",
