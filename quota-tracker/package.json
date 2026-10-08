@@ -2,7 +2,7 @@
   "name": "Quotoo",
   "displayName": "Quotoo",
   "description": "Track AI model quotas and reset countdowns in your status bar (supporting Antigravity IDE, with more coding agents planned)",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "BlaiseRodrigues",
   "icon": "images/icon.png",
   "license": "MIT",
@@ -35,15 +35,15 @@
     "commands": [
       {
         "command": "quoto.refresh",
-        "title": "Quoto: Refresh Quota Now"
+        "title": "Quotoo: Refresh Quota Now"
       },
       {
         "command": "quoto.showDetails",
-        "title": "Quoto: Show Quota Details"
+        "title": "Quotoo: Show Quota Details"
       }
     ],
     "configuration": {
-      "title": "Quoto",
+      "title": "Quotoo",
       "properties": {
         "quoto.refreshIntervalSeconds": {
           "type": "number",

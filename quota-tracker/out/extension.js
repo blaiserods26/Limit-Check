@@ -243,7 +243,7 @@ function formatLocalResetDate(isoDateStr) {
     }
 }
 // ─── Extension Controller ─────────────────────────────────────────────────────
-class QuotoExtension {
+class QuotooExtension {
     constructor(context) {
         this.state = null;
         this.fetchIntervalTimer = null;
@@ -273,7 +273,7 @@ class QuotoExtension {
         this.startUiTickTimer();
     }
     updateStatusConnecting() {
-        this.statusBarItem.text = '$(sync~spin) Quoto: Connecting...';
+        this.statusBarItem.text = '$(sync~spin) Quotoo: Connecting...';
         this.statusBarItem.tooltip = 'Connecting to Antigravity Language Server to fetch quota...';
     }
     async refresh(forceServerRefresh = false, userInitiated = false) {
@@ -294,12 +294,12 @@ class QuotoExtension {
             };
             this.render();
             if (userInitiated) {
-                vscode.window.showInformationMessage('Quoto: Quota successfully refreshed!');
+                vscode.window.showInformationMessage('Quotoo: Quota successfully refreshed!');
             }
         }
         catch (err) {
             if (!this.state) {
-                this.statusBarItem.text = '$(warning) Quoto: Offline';
+                this.statusBarItem.text = '$(warning) Quotoo: Offline';
                 this.statusBarItem.tooltip = `Could not fetch quota: ${err.message}\nClick to retry.`;
             }
             if (userInitiated) {
@@ -328,7 +328,7 @@ class QuotoExtension {
         const md = new vscode.MarkdownString();
         md.isTrusted = true;
         md.supportThemeIcons = true;
-        md.appendMarkdown('### **Quoto — AI Model Quotas**\n\n');
+        md.appendMarkdown('### **Quotoo — AI Model Quotas**\n\n');
         if (gemini) {
             md.appendMarkdown('#### **Gemini Models**\n');
             md.appendMarkdown(`- **Weekly Limit Remaining:** **${gemini.weeklyPercent}%**\n`);
@@ -384,7 +384,7 @@ class QuotoExtension {
             description: 'Fetch the latest limits from Antigravity'
         });
         vscode.window.showQuickPick(items, {
-            title: 'Quoto — Model Quota Details',
+            title: 'Quotoo — Model Quota Details',
             placeHolder: 'Select an action or view quota details'
         }).then(selected => {
             if (selected && selected.label.includes('Refresh')) {
@@ -425,7 +425,7 @@ class QuotoExtension {
 // ─── Extension Entry Points ───────────────────────────────────────────────────
 let tracker = null;
 function activate(context) {
-    tracker = new QuotoExtension(context);
+    tracker = new QuotooExtension(context);
 }
 function deactivate() {
     if (tracker) {

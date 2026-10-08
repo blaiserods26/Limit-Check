@@ -313,7 +313,7 @@ function formatLocalResetDate(isoDateStr?: string): string {
 
 // ─── Extension Controller ─────────────────────────────────────────────────────
 
-class QuotoExtension {
+class QuotooExtension {
   private statusBarItem: vscode.StatusBarItem;
   private state: CurrentQuotaState | null = null;
   private fetchIntervalTimer: NodeJS.Timeout | null = null;
@@ -358,7 +358,7 @@ class QuotoExtension {
   }
 
   private updateStatusConnecting() {
-    this.statusBarItem.text = '$(sync~spin) Quoto: Connecting...';
+    this.statusBarItem.text = '$(sync~spin) Quotoo: Connecting...';
     this.statusBarItem.tooltip = 'Connecting to Antigravity Language Server to fetch quota...';
   }
 
@@ -384,11 +384,11 @@ class QuotoExtension {
       this.render();
 
       if (userInitiated) {
-        vscode.window.showInformationMessage('Quoto: Quota successfully refreshed!');
+        vscode.window.showInformationMessage('Quotoo: Quota successfully refreshed!');
       }
     } catch (err: any) {
       if (!this.state) {
-        this.statusBarItem.text = '$(warning) Quoto: Offline';
+        this.statusBarItem.text = '$(warning) Quotoo: Offline';
         this.statusBarItem.tooltip = `Could not fetch quota: ${err.message}\nClick to retry.`;
       }
       if (userInitiated) {
@@ -422,7 +422,7 @@ class QuotoExtension {
     md.isTrusted = true;
     md.supportThemeIcons = true;
 
-    md.appendMarkdown('### **Quoto — AI Model Quotas**\n\n');
+    md.appendMarkdown('### **Quotoo — AI Model Quotas**\n\n');
 
     if (gemini) {
       md.appendMarkdown('#### **Gemini Models**\n');
@@ -488,7 +488,7 @@ class QuotoExtension {
     });
 
     vscode.window.showQuickPick(items, {
-      title: 'Quoto — Model Quota Details',
+      title: 'Quotoo — Model Quota Details',
       placeHolder: 'Select an action or view quota details'
     }).then(selected => {
       if (selected && selected.label.includes('Refresh')) {
@@ -532,10 +532,10 @@ class QuotoExtension {
 
 // ─── Extension Entry Points ───────────────────────────────────────────────────
 
-let tracker: QuotoExtension | null = null;
+let tracker: QuotooExtension | null = null;
 
 export function activate(context: vscode.ExtensionContext) {
-  tracker = new QuotoExtension(context);
+  tracker = new QuotooExtension(context);
 }
 
 export function deactivate() {

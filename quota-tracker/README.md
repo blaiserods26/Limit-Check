@@ -1,49 +1,78 @@
-# quotooo
+<p align="center">
+  <img src="images/icon.png" alt="Quotoo Logo" width="160" />
+</p>
 
-**quotooo** is a status bar extension that tracks your AI model quotas and reset countdown timers in real time.
+<h1 align="center">Quotoo</h1>
 
-Currently built with first-class support for **Google Antigravity IDE**, with support for additional AI coding agents planned on our roadmap.
+<p align="center">
+  <strong>Real-time AI Model Quota & Reset Countdown Tracker for Antigravity IDE</strong>
+</p>
+
+<p align="center">
+  <a href="#features"><img src="https://img.shields.io/badge/Antigravity_IDE-Supported-blue?style=flat-square&logo=google" alt="Antigravity IDE" /></a>
+  <a href="#installation"><img src="https://img.shields.io/badge/Version-1.0.1-brightgreen?style=flat-square" alt="Version" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="License" /></a>
+  <img src="https://img.shields.io/badge/Platform-Windows%20|%20macOS%20|%20Linux-lightgrey?style=flat-square" alt="Platform" />
+</p>
+
+<p align="center">
+  <img src="images/quotoo-statusbar.png" alt="Quotoo Status Bar in Antigravity IDE" width="100%" />
+</p>
+
+---
+
+**Quotoo** is a lightweight, real-time status bar extension for **Google Antigravity IDE** that tracks your AI model quotas and reset countdown timers directly in your editor workspace.
+
+Never run out of quota in the middle of complex refactoring sessions again — Quotoo keeps you informed of your weekly and 5-hour limit windows for Gemini and Claude models with zero configuration required.
 
 ---
 
 ## Features
 
-- ⚡ **Automated Local Sync**: Directly communicates with the Antigravity Language Server via local RPC — zero manual counting and no external API keys required.
-- 📊 **Status Bar Overview**: Shows remaining quota percentage and live countdowns directly in your status bar:
-  ```text
-  W Gemini: 69% 🕐 3d 8h  |  W Claude: 76% 🕐 5d 10h
-  ```
-- 🔍 **Interactive Details Modal**: Click the status bar item at any time to open an interactive QuickPick breakdown showing both weekly and 5-hour window limits plus a 1-click refresh action.
-- 💡 **Rich Hover Tooltip**: Hover over the status bar item to view formatted markdown details, exact reset dates, and a quick "Refresh Now" link.
-- ⏱️ **Auto-Refresh**: Automatically checks for quota updates in the background and keeps countdown timers updated dynamically.
+### 📊 Live Status Bar Overview
+Monitor remaining model quotas and live countdowns directly in your status bar:
+```text
+W Gemini: 92% 🕐 5d 23h  |  W Claude: 53% 🕐 3d 8h
+```
+
+### 🔍 Interactive Details Modal
+Click the status bar item anytime to open the interactive QuickPick modal with detailed breakdowns for each model tier and a 1-click manual refresh action:
+
+<p align="center">
+  <img src="images/quotoo-modal.png" alt="Interactive Quotoo Details Modal" width="90%" />
+</p>
+
+### 💡 Rich Markdown Hover Tooltip
+Hover over the status bar badge to inspect exact reset dates, countdowns, and quick actions in a formatted floating card:
+
+<p align="center">
+  <img src="images/quotoo-tooltip.png" alt="Quotoo Rich Hover Tooltip" width="90%" />
+</p>
+
+### ⚡ Automated Local Sync
+Quotoo connects directly to the Antigravity Language Server via local Connect RPC — zero manual token counting, no API keys, and no external network queries required.
+
+### ⏱️ Dynamic Background Refresh
+Automatically queries for updated quota data in the background and keeps countdown timers updated smoothly while you work.
 
 ---
 
 ## Requirements
 
 > [!NOTE]
-> Currently, **quotoooo** connects to **Google Antigravity IDE** (or VS Code running on a machine where Antigravity IDE / its Language Server is active). If the server is not detected, the status bar displays `$(warning) quotooo: Offline`.
+> **Quotoo** connects locally to **Google Antigravity IDE** (or VS Code running on a machine where Antigravity IDE / its Language Server is active). If the server is not detected or offline, the status bar displays `$(warning) Quotoo: Offline`.
 
 Compatible with **Windows**, **macOS**, and **Linux**.
 
 ---
 
-## Roadmap
-
-- [x] Antigravity IDE local quota tracking (Gemini & Claude weekly / 5-hour limits)
-- [ ] Customizable warning thresholds (e.g. status bar color change when quota drops below 20%)
-- [ ] Support for additional AI coding agents and CLI assistant quotas
-- [ ] Notification alerts when quotas reset
-
----
-
 ## Configuration
 
-Open **Settings** (`Ctrl+,` or `Cmd+,`) and search for `quotooo`:
+Open **Settings** (`Ctrl+,` or `Cmd+,`) and search for `quoto`:
 
 | Setting | Default | Description |
 |---|---|---|
-| `quotooo.refreshIntervalSeconds` | `30` | Interval (in seconds) to automatically query the language server for updated quota data (minimum: 10s). |
+| `quoto.refreshIntervalSeconds` | `30` | Interval (in seconds) to automatically query the language server for updated quota data (minimum: 10s). |
 
 ---
 
@@ -53,25 +82,34 @@ Open the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`) and search for:
 
 | Command | Identifier | Description |
 |---|---|---|
-| **quotooo: Show Quota Details** | `quotooo.showDetails` | Displays a popup breakdown of Gemini and Claude limits and reset times. |
-| **quotooo: Refresh Quota Now** | `quotooo.refresh` | Forces an immediate refresh from the language server. |
+| **Quotoo: Show Quota Details** | `quoto.showDetails` | Displays interactive modal breakdown of Gemini and Claude limits and reset times. |
+| **Quotoo: Refresh Quota Now** | `quoto.refresh` | Forces an immediate refresh from the Antigravity Language Server. |
 
 ---
 
 ## Installation
 
 ### Install from VSIX
-1. Compile the extension and package it:
+1. Download or package the `.vsix` extension:
    ```bash
    npm install
    npm run compile
-   npx @vscode/vsce package
+   npm run package
    ```
-2. In your IDE: Press `Ctrl+Shift+P` → type **Extensions: Install from VSIX...** → select the generated `.vsix` file.
+2. In Antigravity IDE or VS Code: Press `Ctrl+Shift+P` → type **Extensions: Install from VSIX...** → select `Quotoo-1.0.1.vsix`.
 
 ### Development Mode
 1. Open the `quota-tracker` folder in Antigravity IDE or VS Code.
-2. Press `F5` to launch an Extension Development Host window.
+2. Press `F5` to launch an Extension Development Host window with Quotoo running live.
+
+---
+
+## Roadmap
+
+- [x] Antigravity IDE local quota tracking (Gemini & Claude weekly / 5-hour limits)
+- [ ] Customizable low-quota warning alerts (e.g. status bar color change when quota drops below 20%)
+- [ ] Support for additional AI coding agents and CLI assistant quotas
+- [ ] System notification toast alerts when quotas reset
 
 ---
 
